@@ -1,6 +1,6 @@
 package com.sea.challenge.register.entities;
 
-import java.util.Set;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -38,7 +38,7 @@ public class Client {
     private Address address;
 
     @OneToMany(cascade = CascadeType.ALL)
-    private Set<Phone> phones;
+    private List<Phone> phones;
 
     @Column(nullable = false)
     private String email;
