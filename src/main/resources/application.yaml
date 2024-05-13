@@ -7,4 +7,4 @@ spring:
         username: postgres
         password: qwert
     jpa:
-        hibernate.ddl-auto: create-drop
+        hibernate.ddl-auto: update
