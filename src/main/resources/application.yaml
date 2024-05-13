@@ -1,0 +1,10 @@
+spring:
+    application:
+        name: register
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/register
+        username: postgres
+        password: qwert
+    jpa:
+        hibernate.ddl-auto: update
