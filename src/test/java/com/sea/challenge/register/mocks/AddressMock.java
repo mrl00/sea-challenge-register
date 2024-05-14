@@ -1,6 +1,6 @@
 package com.sea.challenge.register.mocks;
 
-import com.sea.challenge.register.entities.Address;
+import com.sea.challenge.register.models.entities.Address;
 
 public class AddressMock {
     public static Address SIMPLE_ADDRESS = getSimpleAddress();

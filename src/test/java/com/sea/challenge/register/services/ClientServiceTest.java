@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.sea.challenge.register.entities.Client;
 import com.sea.challenge.register.mocks.ClientMock;
+import com.sea.challenge.register.models.entities.Client;
 import com.sea.challenge.register.repositories.ClientRepository;
 
 @SpringBootTest

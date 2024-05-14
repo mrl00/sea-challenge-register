@@ -3,7 +3,7 @@ package com.sea.challenge.register.services;
 import java.util.List;
 import java.util.Optional;
 
-import com.sea.challenge.register.entities.Client;
+import com.sea.challenge.register.models.entities.Client;
 
 public interface ClientService {
     public Optional<Client> findClientById(Long id);
