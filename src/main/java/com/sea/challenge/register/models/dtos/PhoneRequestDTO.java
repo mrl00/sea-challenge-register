@@ -1,6 +1,6 @@
 package com.sea.challenge.register.models.dtos;
 
-import com.sea.challenge.register.models.PhoneType;
+import com.sea.challenge.register.models.enums.PhoneType;
 import com.sea.challenge.register.validators.PhoneNumber;
 
 import lombok.AllArgsConstructor;

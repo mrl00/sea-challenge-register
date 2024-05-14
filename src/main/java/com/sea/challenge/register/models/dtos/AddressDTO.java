@@ -1,7 +1,7 @@
 package com.sea.challenge.register.models.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sea.challenge.register.models.UF;
+import com.sea.challenge.register.models.enums.UF;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -38,5 +38,5 @@ public class AddressDTO {
     private UF uf;
 
     @Size(max = 100)
-    private String complemento;
+    private String complement;
 }

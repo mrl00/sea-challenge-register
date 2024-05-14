@@ -1,6 +1,7 @@
 package com.sea.challenge.register.models.entities;
 
 import com.sea.challenge.register.models.PhoneType;
+import com.sea.challenge.register.models.enums.PhoneType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

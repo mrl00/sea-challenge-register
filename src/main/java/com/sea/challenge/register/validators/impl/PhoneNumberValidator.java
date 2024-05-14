@@ -1,7 +1,7 @@
 package com.sea.challenge.register.validators.impl;
 
-import com.sea.challenge.register.models.PhoneType;
 import com.sea.challenge.register.models.dtos.PhoneRequestDTO;
+import com.sea.challenge.register.models.enums.PhoneType;
 import com.sea.challenge.register.validators.PhoneNumber;
 
 import jakarta.validation.ConstraintValidator;
