@@ -8,3 +8,6 @@ spring:
         password: qwert
     jpa:
         hibernate.ddl-auto: create-drop
+    jackson:
+        mapper:
+            ACCEPT_CASE_INSENSITIVE_ENUMS: true
