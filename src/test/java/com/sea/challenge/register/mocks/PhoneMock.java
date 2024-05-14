@@ -3,11 +3,13 @@ package com.sea.challenge.register.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sea.challenge.register.models.PhoneType;
+import com.sea.challenge.register.models.dtos.PhoneRequestDTO;
 import com.sea.challenge.register.models.entities.Phone;
+import com.sea.challenge.register.models.enums.PhoneType;
 
 public class PhoneMock {
     public static List<Phone> SIMPLE_PHONES = getSimplePhone();
+    public static PhoneRequestDTO SIMPLE_PHONE_DTO = getSimplePhoneDTO();
 
     private static List<Phone> getSimplePhone() {
         var phoneList = new ArrayList<Phone>();
@@ -19,5 +21,9 @@ public class PhoneMock {
         phoneList.add(p2);
 
         return phoneList;
+    }
+
+    private static PhoneRequestDTO getSimplePhoneDTO() {
+        return new PhoneRequestDTO(PhoneType.CELPHONE, "(61) 98888-7777");
     }
 }
