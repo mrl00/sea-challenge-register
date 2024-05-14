@@ -1,7 +1,5 @@
 package com.sea.challenge.register.models.dtos;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sea.challenge.register.models.UF;
 
