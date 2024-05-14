@@ -1,4 +1,6 @@
-package com.sea.challenge.register.entities;
+package com.sea.challenge.register.models.entities;
+
+import com.sea.challenge.register.models.PhoneType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
