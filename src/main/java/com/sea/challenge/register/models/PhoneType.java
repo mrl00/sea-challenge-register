@@ -1,4 +1,4 @@
-package com.sea.challenge.register.entities;
+package com.sea.challenge.register.models;
 
 public enum PhoneType {
     RESIDENCIAL,

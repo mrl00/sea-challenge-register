@@ -3,7 +3,7 @@ package com.sea.challenge.register.mocks;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sea.challenge.register.entities.Client;
+import com.sea.challenge.register.models.entities.Client;
 
 public class ClientMock {
     public static Client SIMPLE_CLIENT = getSimpleClient();

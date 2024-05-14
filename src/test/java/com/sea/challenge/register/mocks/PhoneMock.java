@@ -3,8 +3,8 @@ package com.sea.challenge.register.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sea.challenge.register.entities.Phone;
-import com.sea.challenge.register.entities.PhoneType;
+import com.sea.challenge.register.models.PhoneType;
+import com.sea.challenge.register.models.entities.Phone;
 
 public class PhoneMock {
     public static List<Phone> SIMPLE_PHONES = getSimplePhone();
