@@ -25,4 +25,10 @@ public class ClientRequestDTO {
     @Email(message = "invalid email")
     @JsonProperty(required = true)
     private String email;
+
+    @JsonProperty(required = true)
+    private AddressDTO address;
+
+    @JsonProperty(required = true)
+    private PhoneDTO phone;
 }

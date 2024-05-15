@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@PhoneNumber(message = "invalid phone number")
+@PhoneNumber(message = "{phone.message}")
 public class PhoneDTO {
     private PhoneType phoneType;
     private String phone;
