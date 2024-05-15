@@ -21,10 +21,20 @@ public interface ClientMapper {
     @Mapping(source = "phones", target = "phones", qualifiedByName = "phonesDTOsToPhoneModels")
     Client fromRequestDTOToModel(ClientRequestDTO dto);
 
+    @Mapping(source = "phones", target = "phones", qualifiedByName = "PhoneModelsTophonesDTOs")
+    ClientRequestDTO fromModelToDTO(Client client);
+
     @Named("phonesDTOsToPhoneModels")
     default List<Phone> fromPhoneToPhoneDTOList(List<PhoneDTO> dtos) {
         return dtos.stream()
                 .map(new PhoneMapperImpl()::fromDTOToModel)
+                .collect(Collectors.toList());
+    }
+
+    @Named("PhoneModelsTophonesDTOs")
+    default List<PhoneDTO> fromPhoneModelToPhoneDTO(List<Phone> phones) {
+        return phones.stream()
+                .map(new PhoneMapperImpl()::fromModelToDTO)
                 .collect(Collectors.toList());
     }
 }

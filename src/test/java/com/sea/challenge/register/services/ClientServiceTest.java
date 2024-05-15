@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.sea.challenge.register.models.dtos.ClientRequestDTO;
+import com.sea.challenge.register.models.mappers.ClientMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +29,9 @@ import com.sea.challenge.register.repositories.ClientRepository;
 @SpringBootTest
 public class ClientServiceTest {
     @Autowired
+    private ClientMapper clientMapper;
+
+    @Autowired
     private ClientService clientService;
 
     @MockBean
@@ -36,12 +40,15 @@ public class ClientServiceTest {
     @Test
     public void testFindClientByIdWhenIdIsNotNullAndFindClient() {
         Optional<Client> clientToFind = Optional.of(ClientMock.SIMPLE_CLIENT);
+        Optional<ClientRequestDTO> clientDTO = clientToFind
+                .map(client -> clientMapper.fromModelToDTO(client));
+
         when(clientRepository.findById(anyLong())).thenReturn(clientToFind);
 
-        Optional<Client> foundClient = clientService.findClientById(1L);
+        Optional<ClientRequestDTO> foundClient = clientService.findClientById(1L);
 
         assertTrue(foundClient.isPresent());
-        assertEquals(foundClient, clientToFind);
+        assertEquals(foundClient, clientDTO);
     }
 
     @Test
@@ -49,7 +56,7 @@ public class ClientServiceTest {
         Optional<Client> clientToFind = Optional.empty();
         when(clientRepository.findById(any())).thenReturn(clientToFind);
 
-        Optional<Client> notFoundClient = clientService.findClientById(1L);
+        Optional<ClientRequestDTO> notFoundClient = clientService.findClientById(1L);
 
         assertTrue(notFoundClient.isEmpty());
     }

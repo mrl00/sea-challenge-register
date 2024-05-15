@@ -7,7 +7,7 @@ import com.sea.challenge.register.models.dtos.ClientRequestDTO;
 import com.sea.challenge.register.models.entities.Client;
 
 public interface ClientService {
-    public Optional<Client> findClientById(Long id);
+    public Optional<ClientRequestDTO> findClientById(Long id);
 
     public List<Client> findAllClients();
 

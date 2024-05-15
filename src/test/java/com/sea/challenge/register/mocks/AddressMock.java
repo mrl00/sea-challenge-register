@@ -13,6 +13,6 @@ public class AddressMock {
     }
 
     private static AddressDTO getSimpleAddressDTO() {
-        return new AddressDTO("11456000", "logradouro", "bairro", "brasilia", UF.AC, "complemento");
+        return new AddressDTO("11.456-000", "logradouro", "bairro", "brasilia", UF.AC, "complemento");
     }
 }

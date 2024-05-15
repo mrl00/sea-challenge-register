@@ -16,8 +16,9 @@ public class PhoneMock {
 
     private static List<Phone> getSimplePhones() {
         Phone p1 = new Phone(1L, PhoneType.CELPHONE, "61", "98888", "1111");
+        Phone p2 = new Phone(1L, PhoneType.CELPHONE, "61", "98888", "2222");
 
-        return Arrays.asList(p1);
+        return Arrays.asList(p1,p2);
     }
 
     private static Phone getSimplePhone() {
