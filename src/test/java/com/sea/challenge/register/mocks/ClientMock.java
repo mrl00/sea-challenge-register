@@ -14,11 +14,11 @@ public class ClientMock {
     private static Client getSimpleClient() {
         return new Client(
                 1L,
-                "an client",
-                "12345678900",
+                "clientTest",
+                "32259163076",
                 AddressMock.SIMPLE_ADDRESS,
                 PhoneMock.SIMPLE_PHONES,
-                "email@mail.com");
+                "client@mail.com");
     }
 
     private static ClientRequestDTO getSimpleClientRequestDTO() {
