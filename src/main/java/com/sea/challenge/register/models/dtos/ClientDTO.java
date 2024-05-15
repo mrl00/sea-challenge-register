@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientRequestDTO {
+public class ClientDTO {
     @Pattern(regexp = "^[A-Za-z0-9\\s]{3,100}$", message = "{client.name}")
     @JsonProperty(required = true)
     private String name;
