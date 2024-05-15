@@ -14,15 +14,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientRequestDTO {
-    @Pattern(regexp = "^[A-Za-z0-9\\s]{3,100}$", message = "invalid name")
+    @Pattern(regexp = "^[A-Za-z0-9\\s]{3,100}$", message = "{client.name}")
     @JsonProperty(required = true)
     private String name;
 
-    @CPF(message = "invalid CPF")
+    @CPF(message = "{client.cpf}")
     @JsonProperty(required = true)
     private String cpf;
 
-    @Email(message = "invalid email")
+    @Email(message = "{client.email}")
     @JsonProperty(required = true)
     private String email;
 
