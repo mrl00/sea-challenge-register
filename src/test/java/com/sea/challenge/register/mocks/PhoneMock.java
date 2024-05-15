@@ -15,14 +15,14 @@ public class PhoneMock {
     public static List<PhoneDTO> SIMPLE_PHONE_DTOS = getSimplePhoneDTOs();
 
     private static List<Phone> getSimplePhones() {
-        Phone p1 = new Phone(1L, PhoneType.CELLPHONE, "61", "98888", "1111");
-        Phone p2 = new Phone(1L, PhoneType.CELLPHONE, "61", "98888", "2222");
+        Phone p1 = new Phone(1L, PhoneType.CELLPHONE, "61988881111");
+        Phone p2 = new Phone(1L, PhoneType.CELLPHONE, "61988882222");
 
         return Arrays.asList(p1,p2);
     }
 
     private static Phone getSimplePhone() {
-        return new Phone(1L, PhoneType.CELLPHONE, "61", "98888", "1111");
+        return new Phone(1L, PhoneType.CELLPHONE, "61988881111");
     }
 
     private static List<PhoneDTO> getSimplePhoneDTOs() {

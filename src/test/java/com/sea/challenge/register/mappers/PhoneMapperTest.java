@@ -24,9 +24,7 @@ public class PhoneMapperTest {
         Phone phone = mapper.fromDTOToModel(dto);
 
         assertEquals(phone.getPhoneType(), PhoneType.CELLPHONE);
-        assertEquals(phone.getDdd(), "61");
-        assertEquals(phone.getPrefix(), "98888");
-        assertEquals(phone.getSuffix(), "7777");
+        assertEquals(phone.toString(), dto.getPhone());
     }
 
     @Test
