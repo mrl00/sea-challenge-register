@@ -1,6 +1,6 @@
 package com.sea.challenge.register.models.dtos;
 
-import com.sea.challenge.register.models.PhoneType;
+import com.sea.challenge.register.models.enums.PhoneType;
 import com.sea.challenge.register.validators.PhoneNumber;
 
 import lombok.AllArgsConstructor;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@PhoneNumber(message = "invalid phone number")
-public class PhoneRequestDTO {
+@PhoneNumber(message = "{phone.message}")
+public class PhoneDTO {
     private PhoneType phoneType;
     private String phone;
 }

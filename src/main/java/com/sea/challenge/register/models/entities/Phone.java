@@ -1,6 +1,6 @@
 package com.sea.challenge.register.models.entities;
 
-import com.sea.challenge.register.models.PhoneType;
+import com.sea.challenge.register.models.enums.PhoneType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +35,11 @@ public class Phone {
     @Column(nullable = false)
     private String prefix;
 
-    @Column(nullable = false)
+    @Column(length = 4, nullable = false)
     private String suffix;
+
+    @Override
+    public String toString() {
+        return String.format("(%s) %s-%s", this.ddd, this.prefix, this.suffix);
+    }
 }

@@ -1,5 +1,7 @@
 package com.sea.challenge.register.models.entities;
 
+import com.sea.challenge.register.models.enums.UF;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +36,7 @@ public class Address {
     private String city;
 
     @Column(nullable = false)
-    private String uf;
+    private UF uf;
 
-    private String complemento;
+    private String complement;
 }

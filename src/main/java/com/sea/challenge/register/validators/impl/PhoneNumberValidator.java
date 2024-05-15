@@ -1,20 +1,20 @@
 package com.sea.challenge.register.validators.impl;
 
-import com.sea.challenge.register.models.PhoneType;
-import com.sea.challenge.register.models.dtos.PhoneRequestDTO;
+import com.sea.challenge.register.models.dtos.PhoneDTO;
+import com.sea.challenge.register.models.enums.PhoneType;
 import com.sea.challenge.register.validators.PhoneNumber;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, PhoneRequestDTO> {
+public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, PhoneDTO> {
 
     @Override
     public void initialize(PhoneNumber ph) {
     }
 
     @Override
-    public boolean isValid(PhoneRequestDTO value, ConstraintValidatorContext arg1) {
+    public boolean isValid(PhoneDTO value, ConstraintValidatorContext arg1) {
         PhoneType phoneTypeValue = value.getPhoneType();
         String phoneValue = value.getPhone();
 

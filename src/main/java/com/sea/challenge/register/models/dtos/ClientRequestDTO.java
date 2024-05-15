@@ -1,6 +1,10 @@
 package com.sea.challenge.register.models.dtos;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.br.CPF;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
@@ -12,12 +16,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientRequestDTO {
-    @Pattern(regexp = "^[A-Za-z0-9\\s]{3,100}$", message = "invalid name")
+    @Pattern(regexp = "^[A-Za-z0-9\\s]{3,100}$", message = "{client.name}")
+    @JsonProperty(required = true)
     private String name;
 
-    @CPF(message = "invalid CPF")
+    @CPF(message = "{client.cpf}")
+    @JsonProperty(required = true)
     private String cpf;
 
-    @Email(message = "invalid email")
+    @Email(message = "{client.email}")
+    @JsonProperty(required = true)
     private String email;
+
+    @JsonProperty(required = true)
+    private AddressDTO address;
+
+    @JsonProperty(required = true)
+    private List<PhoneDTO> phones;
 }
