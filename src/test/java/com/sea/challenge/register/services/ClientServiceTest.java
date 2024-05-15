@@ -15,6 +15,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Optional;
 
+import com.sea.challenge.register.models.dtos.ClientRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -72,9 +73,11 @@ public class ClientServiceTest {
     @Test
     public void testSaveClientWhenClientIsNotNull() {
         Client clientToSave = ClientMock.SIMPLE_CLIENT;
+        ClientRequestDTO clientDTOToSave = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
+
         when(clientRepository.save(any(Client.class))).thenReturn(clientToSave);
 
-        Client savedClient = clientService.saveClient(clientToSave);
+        Client savedClient = clientService.saveClient(clientDTOToSave);
 
         assertNotNull(savedClient);
         assertEquals(clientToSave, savedClient);
