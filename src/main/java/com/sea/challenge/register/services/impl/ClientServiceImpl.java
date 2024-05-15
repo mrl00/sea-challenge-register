@@ -3,6 +3,8 @@ package com.sea.challenge.register.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import com.sea.challenge.register.models.dtos.ClientRequestDTO;
+import com.sea.challenge.register.models.mappers.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ClientServiceImpl implements ClientService {
+
+    @Autowired
+    private ClientMapper mapper;
+
     @Autowired
     private ClientRepository clientRepository;
 
@@ -33,7 +39,8 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client saveClient(Client client) {
+    public Client saveClient(ClientRequestDTO clientDTO) {
+        Client client = mapper.fromRequestDTOToModel(clientDTO);
         return clientRepository.save(client);
     }
 
