@@ -1,6 +1,5 @@
 package com.sea.challenge.register.controllers;
 
-import com.sea.challenge.register.models.dtos.PhoneDTO;
 import com.sea.challenge.register.models.entities.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +28,8 @@ public class ClientController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/v1/client/create")
-    public ResponseEntity<?> createClient(@Valid @RequestBody ClientRequestDTO request) {
+    @PostMapping("/v1/client")
+    public ResponseEntity<?> saveClient(@Valid @RequestBody ClientRequestDTO request) {
         Client savedClient = clientService.saveClient(request);
 
         URI location = ServletUriComponentsBuilder
