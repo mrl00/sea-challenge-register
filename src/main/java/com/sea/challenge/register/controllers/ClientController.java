@@ -1,18 +1,19 @@
 package com.sea.challenge.register.controllers;
 
+import com.sea.challenge.register.models.dtos.PhoneDTO;
+import com.sea.challenge.register.models.entities.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.sea.challenge.register.models.dtos.ClientRequestDTO;
 import com.sea.challenge.register.services.ClientService;
 
 import jakarta.validation.Valid;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/register")
@@ -21,12 +22,23 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping("/v1/client/{id}")
-    public String getMethodName(@RequestParam Long id) {
-        return new String();
+    public ResponseEntity<?> findClientById(@PathVariable Long id) {
+        Optional<ClientRequestDTO> clientDTO = clientService.findClientById(id);
+        if(clientDTO.isPresent())
+            return ResponseEntity.ok(clientDTO.get());
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/v1/client/create")
     public ResponseEntity<?> createClient(@Valid @RequestBody ClientRequestDTO request) {
-        return ResponseEntity.ok(request);
+        Client savedClient = clientService.saveClient(request);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedClient.getClientId())
+                .toUri();
+
+        return ResponseEntity.created(location).build();
     }
 }
