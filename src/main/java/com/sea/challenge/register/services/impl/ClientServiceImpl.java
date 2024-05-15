@@ -29,8 +29,10 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public Optional<Client> findClientById(Long id) {
-        return clientRepository.findById(id);
+    public Optional<ClientRequestDTO> findClientById(Long id) {
+        return clientRepository
+                .findById(id)
+                .map(client -> mapper.fromModelToDTO(client));
     }
 
     @Override
