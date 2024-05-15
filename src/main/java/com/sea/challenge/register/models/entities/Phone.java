@@ -37,4 +37,9 @@ public class Phone {
 
     @Column(length = 4, nullable = false)
     private String suffix;
+
+    @Override
+    public String toString() {
+        return String.format("(%s) %s-%s", this.ddd, this.prefix, this.suffix);
+    }
 }
