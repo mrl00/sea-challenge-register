@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.sea.challenge.register.models.dtos.ClientRequestDTO;
+import com.sea.challenge.register.models.dtos.ClientDTO;
 import com.sea.challenge.register.services.ClientService;
 
 import jakarta.validation.Valid;
@@ -22,14 +22,14 @@ public class ClientController {
 
     @GetMapping("/v1/client/{id}")
     public ResponseEntity<?> findClientById(@PathVariable Long id) {
-        Optional<ClientRequestDTO> clientDTO = clientService.findClientById(id);
+        Optional<ClientDTO> clientDTO = clientService.findClientById(id);
         if(clientDTO.isPresent())
             return ResponseEntity.ok(clientDTO.get());
         return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/v1/client")
-    public ResponseEntity<?> saveClient(@Valid @RequestBody ClientRequestDTO request) {
+    public ResponseEntity<?> saveClient(@Valid @RequestBody ClientDTO request) {
         Client savedClient = clientService.saveClient(request);
 
         URI location = ServletUriComponentsBuilder

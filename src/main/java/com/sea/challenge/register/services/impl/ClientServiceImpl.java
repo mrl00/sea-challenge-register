@@ -3,7 +3,7 @@ package com.sea.challenge.register.services.impl;
 import java.util.List;
 import java.util.Optional;
 
-import com.sea.challenge.register.models.dtos.ClientRequestDTO;
+import com.sea.challenge.register.models.dtos.ClientDTO;
 import com.sea.challenge.register.models.mappers.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class ClientServiceImpl implements ClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public Optional<ClientRequestDTO> findClientById(Long id) {
+    public Optional<ClientDTO> findClientById(Long id) {
         return clientRepository
                 .findById(id)
                 .map(client -> mapper.fromModelToDTO(client));
@@ -41,7 +41,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public Client saveClient(ClientRequestDTO clientDTO) {
+    public Client saveClient(ClientDTO clientDTO) {
         Client client = mapper.fromRequestDTOToModel(clientDTO);
         return clientRepository.save(client);
     }

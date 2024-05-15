@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Optional;
 
-import com.sea.challenge.register.models.dtos.ClientRequestDTO;
+import com.sea.challenge.register.models.dtos.ClientDTO;
 import com.sea.challenge.register.models.mappers.ClientMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +40,12 @@ public class ClientServiceTest {
     @Test
     public void testFindClientByIdWhenIdIsNotNullAndFindClient() {
         Optional<Client> clientToFind = Optional.of(ClientMock.SIMPLE_CLIENT);
-        Optional<ClientRequestDTO> clientDTO = clientToFind
+        Optional<ClientDTO> clientDTO = clientToFind
                 .map(client -> clientMapper.fromModelToDTO(client));
 
         when(clientRepository.findById(anyLong())).thenReturn(clientToFind);
 
-        Optional<ClientRequestDTO> foundClient = clientService.findClientById(1L);
+        Optional<ClientDTO> foundClient = clientService.findClientById(1L);
 
         assertTrue(foundClient.isPresent());
         assertEquals(foundClient, clientDTO);
@@ -56,7 +56,7 @@ public class ClientServiceTest {
         Optional<Client> clientToFind = Optional.empty();
         when(clientRepository.findById(any())).thenReturn(clientToFind);
 
-        Optional<ClientRequestDTO> notFoundClient = clientService.findClientById(1L);
+        Optional<ClientDTO> notFoundClient = clientService.findClientById(1L);
 
         assertTrue(notFoundClient.isEmpty());
     }
@@ -80,7 +80,7 @@ public class ClientServiceTest {
     @Test
     public void testSaveClientWhenClientIsNotNull() {
         Client clientToSave = ClientMock.SIMPLE_CLIENT;
-        ClientRequestDTO clientDTOToSave = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
+        ClientDTO clientDTOToSave = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
 
         when(clientRepository.save(any(Client.class))).thenReturn(clientToSave);
 

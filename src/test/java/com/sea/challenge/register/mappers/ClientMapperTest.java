@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
+import com.sea.challenge.register.models.dtos.ClientDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.sea.challenge.register.mocks.ClientMock;
 import com.sea.challenge.register.models.dtos.AddressDTO;
-import com.sea.challenge.register.models.dtos.ClientRequestDTO;
 import com.sea.challenge.register.models.dtos.PhoneDTO;
 import com.sea.challenge.register.models.entities.Address;
 import com.sea.challenge.register.models.entities.Client;
@@ -24,7 +24,7 @@ public class ClientMapperTest {
 
     @Test
     public void fromRequestDTOToModelTest() {
-        ClientRequestDTO dto = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
+        ClientDTO dto = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
         Client client = mapper.fromRequestDTOToModel(dto);
 
         AddressDTO addressDTO = dto.getAddress();
@@ -54,7 +54,7 @@ public class ClientMapperTest {
     @Test
     public void fromModelToDTOTest() {
         Client client = ClientMock.SIMPLE_CLIENT;
-        ClientRequestDTO clientDTO = mapper.fromModelToDTO(client);
+        ClientDTO clientDTO = mapper.fromModelToDTO(client);
 
         Address address = client.getAddress();
         AddressDTO addressDTO = clientDTO.getAddress();

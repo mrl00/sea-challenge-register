@@ -2,7 +2,7 @@ package com.sea.challenge.register.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sea.challenge.register.mocks.ClientMock;
-import com.sea.challenge.register.models.dtos.ClientRequestDTO;
+import com.sea.challenge.register.models.dtos.ClientDTO;
 import com.sea.challenge.register.models.entities.Client;
 import com.sea.challenge.register.services.ClientService;
 import org.hamcrest.CoreMatchers;
@@ -44,7 +44,7 @@ public class ClientControllerTest {
     private ObjectMapper objectMapper = new ObjectMapper();
 
     private Client savedClient;
-    private ClientRequestDTO clientDTO;
+    private ClientDTO clientDTO;
 
     @BeforeEach
     public void setup() {
@@ -73,7 +73,7 @@ public class ClientControllerTest {
     @Order(value = Integer.MAX_VALUE / 2)
     @Test
     public void saveClientTest_Success() throws Exception {
-        when(clientService.saveClient(any(ClientRequestDTO.class)))
+        when(clientService.saveClient(any(ClientDTO.class)))
                 .thenReturn(savedClient);
         clientDTO.getAddress().setCep("11.456-000");
         var jsonClientDTO = objectMapper.writeValueAsString(clientDTO);
@@ -90,7 +90,7 @@ public class ClientControllerTest {
         //set invalid cep for dto
         clientDTO.getAddress().setCep("11456000");
 
-        when(clientService.saveClient(any(ClientRequestDTO.class)))
+        when(clientService.saveClient(any(ClientDTO.class)))
                 .thenReturn(savedClient);
 
         mockMvc.perform(post("/register/v1/client")
