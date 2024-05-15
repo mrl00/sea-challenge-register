@@ -18,6 +18,19 @@ public class AddressMapperTest {
     private AddressMapper mapper;
 
     @Test
+    public void fromModelToDTOTest() {
+        Address address = AddressMock.SIMPLE_ADDRESS;
+        AddressDTO dto = mapper.fromModelToDTO(address);
+
+        assertEquals(dto.getCep(), address.getCep());
+        assertEquals(dto.getPublicPlace(), address.getPublicPlace());
+        assertEquals(dto.getNeighborhood(), address.getNeighborhood());
+        assertEquals(dto.getCity(), address.getCity());
+        assertEquals(dto.getUf(), address.getUf());
+        assertEquals(dto.getComplement(), address.getComplement());
+    }
+
+    @Test
     public void fromDTOToModelTest() {
         AddressDTO dto = AddressMock.SIMPLE_ADDRESS_DTO;
         Address address = mapper.fromDTOToModel(dto);
