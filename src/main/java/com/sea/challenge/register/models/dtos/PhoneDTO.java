@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @PhoneNumber(message = "invalid phone number")
-public class PhoneRequestDTO {
+public class PhoneDTO {
     private PhoneType phoneType;
     private String phone;
 }

@@ -6,12 +6,12 @@ import java.util.regex.Pattern;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 
-import com.sea.challenge.register.models.dtos.PhoneRequestDTO;
+import com.sea.challenge.register.models.dtos.PhoneDTO;
 import com.sea.challenge.register.models.entities.Phone;
 
 @Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.FIELD)
 public interface PhoneMapper {
-    default Phone fromDTOToModel(PhoneRequestDTO dto) {
+    default Phone fromDTOToModel(PhoneDTO dto) {
         Phone phone = new Phone();
         phone.setPhoneType(dto.getPhoneType());
 
@@ -27,7 +27,7 @@ public interface PhoneMapper {
         return phone;
     }
 
-    default PhoneRequestDTO fromModelToDTO(Phone phone) {
-        return new PhoneRequestDTO(phone.getPhoneType(), phone.toString());
+    default PhoneDTO fromModelToDTO(Phone phone) {
+        return new PhoneDTO(phone.getPhoneType(), phone.toString());
     }
 }

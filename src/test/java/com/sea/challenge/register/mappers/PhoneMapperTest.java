@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.sea.challenge.register.mocks.PhoneMock;
-import com.sea.challenge.register.models.dtos.PhoneRequestDTO;
+import com.sea.challenge.register.models.dtos.PhoneDTO;
 import com.sea.challenge.register.models.entities.Phone;
 import com.sea.challenge.register.models.enums.PhoneType;
 import com.sea.challenge.register.models.mappers.PhoneMapper;
@@ -20,7 +20,7 @@ public class PhoneMapperTest {
 
     @Test
     public void fromDTOToModelTest() {
-        PhoneRequestDTO dto = PhoneMock.SIMPLE_PHONE_DTO;
+        PhoneDTO dto = PhoneMock.SIMPLE_PHONE_DTO;
         Phone phone = mapper.fromDTOToModel(dto);
 
         assertEquals(phone.getPhoneType(), PhoneType.CELPHONE);
