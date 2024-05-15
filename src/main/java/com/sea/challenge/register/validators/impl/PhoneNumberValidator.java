@@ -19,9 +19,9 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, Ph
         String phoneValue = value.getPhone();
 
         switch (phoneTypeValue) {
-            case CELPHONE:
+            case CELLPHONE:
                 return phoneValue.matches("\\(\\d{2}\\) \\d{5}-\\d{4}");
-            case RESIDENCIAL:
+            case RESIDENTIAL:
             case COMMERCIAL:
                 return phoneValue.matches("\\(\\d{2}\\) \\d{4}-\\d{4}");
             default:

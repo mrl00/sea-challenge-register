@@ -23,7 +23,7 @@ public class PhoneMapperTest {
         PhoneDTO dto = PhoneMock.SIMPLE_PHONE_DTO;
         Phone phone = mapper.fromDTOToModel(dto);
 
-        assertEquals(phone.getPhoneType(), PhoneType.CELPHONE);
+        assertEquals(phone.getPhoneType(), PhoneType.CELLPHONE);
         assertEquals(phone.getDdd(), "61");
         assertEquals(phone.getPrefix(), "98888");
         assertEquals(phone.getSuffix(), "7777");

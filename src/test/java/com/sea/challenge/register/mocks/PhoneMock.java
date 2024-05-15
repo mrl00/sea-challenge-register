@@ -15,24 +15,24 @@ public class PhoneMock {
     public static List<PhoneDTO> SIMPLE_PHONE_DTOS = getSimplePhoneDTOs();
 
     private static List<Phone> getSimplePhones() {
-        Phone p1 = new Phone(1L, PhoneType.CELPHONE, "61", "98888", "1111");
-        Phone p2 = new Phone(1L, PhoneType.CELPHONE, "61", "98888", "2222");
+        Phone p1 = new Phone(1L, PhoneType.CELLPHONE, "61", "98888", "1111");
+        Phone p2 = new Phone(1L, PhoneType.CELLPHONE, "61", "98888", "2222");
 
         return Arrays.asList(p1,p2);
     }
 
     private static Phone getSimplePhone() {
-        return new Phone(1L, PhoneType.CELPHONE, "61", "98888", "1111");
+        return new Phone(1L, PhoneType.CELLPHONE, "61", "98888", "1111");
     }
 
     private static List<PhoneDTO> getSimplePhoneDTOs() {
-        PhoneDTO p1 = new PhoneDTO(PhoneType.CELPHONE, "(61) 98888-1111");
-        PhoneDTO p2 = new PhoneDTO(PhoneType.CELPHONE, "(61) 98888-2222");
+        PhoneDTO p1 = new PhoneDTO(PhoneType.CELLPHONE, "(61) 98888-1111");
+        PhoneDTO p2 = new PhoneDTO(PhoneType.CELLPHONE, "(61) 98888-2222");
 
         return Arrays.asList(p1, p2);
     }
 
     private static PhoneDTO getSimplePhoneDTO() {
-        return new PhoneDTO(PhoneType.CELPHONE, "(61) 98888-7777");
+        return new PhoneDTO(PhoneType.CELLPHONE, "(61) 98888-7777");
     }
 }
