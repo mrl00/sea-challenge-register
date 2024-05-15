@@ -29,4 +29,12 @@ public class PhoneMapperTest {
         assertEquals(phone.getSuffix(), "7777");
     }
 
+    @Test
+    public void fromModelToDTO() {
+        Phone phone = PhoneMock.SIMPLE_PHONE;
+        PhoneDTO dto = mapper.fromModelToDTO(phone);
+        assertEquals(phone.toString(), dto.getPhone());
+        assertEquals(phone.getPhoneType(), dto.getPhoneType());
+    }
+
 }
