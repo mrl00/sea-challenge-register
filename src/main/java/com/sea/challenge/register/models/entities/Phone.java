@@ -29,17 +29,21 @@ public class Phone {
     @Column(nullable = false)
     private PhoneType phoneType;
 
-    @Column(length = 2, nullable = false)
-    private String ddd;
-
-    @Column(nullable = false)
-    private String prefix;
-
-    @Column(length = 4, nullable = false)
-    private String suffix;
+    @Column(length = 11, nullable = false)
+    private String phone;
 
     @Override
     public String toString() {
-        return String.format("(%s) %s-%s", this.ddd, this.prefix, this.suffix);
+        String ddd = this.phone.substring(0,2);
+
+        String prefix = this.phoneType == PhoneType.CELLPHONE ?
+                this.phone.substring(2,7):
+                this.phone.substring(2,6);
+
+        String suffix = this.phoneType == PhoneType.CELLPHONE ?
+                this.phone.substring(7,11) :
+                this.phone.substring(6,10);
+
+        return String.format("(%s) %s-%s", ddd, prefix, suffix);
     }
 }
