@@ -1,7 +1,7 @@
 package com.sea.challenge.register.models.enums;
 
 public enum PhoneType {
-    RESIDENCIAL,
-    CELPHONE,
+    RESIDENTIAL,
+    CELLPHONE,
     COMMERCIAL,
 }
