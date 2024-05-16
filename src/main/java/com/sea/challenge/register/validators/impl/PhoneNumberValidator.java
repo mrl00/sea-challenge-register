@@ -10,22 +10,14 @@ import jakarta.validation.ConstraintValidatorContext;
 public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, PhoneDTO> {
 
     @Override
-    public void initialize(PhoneNumber ph) {
-    }
-
-    @Override
     public boolean isValid(PhoneDTO value, ConstraintValidatorContext arg1) {
         PhoneType phoneTypeValue = value.getPhoneType();
         String phoneValue = value.getPhone();
 
-        switch (phoneTypeValue) {
-            case CELLPHONE:
-                return phoneValue.matches("\\(\\d{2}\\) \\d{5}-\\d{4}");
-            case RESIDENTIAL:
-            case COMMERCIAL:
-                return phoneValue.matches("\\(\\d{2}\\) \\d{4}-\\d{4}");
-            default:
-                return false;
-        }
+        return switch (phoneTypeValue) {
+            case CELLPHONE -> phoneValue.matches("\\(\\d{2}\\) \\d{5}-\\d{4}");
+            case RESIDENTIAL, COMMERCIAL -> phoneValue.matches("\\(\\d{2}\\) \\d{4}-\\d{4}");
+            default -> false;
+        };
     }
 }
