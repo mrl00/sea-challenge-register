@@ -1,6 +1,8 @@
 package com.sea.challenge.register.models.mappers;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import com.sea.challenge.register.models.dtos.ClientDTO;
@@ -19,6 +21,7 @@ public interface ClientMapper {
     @Mapping(target = "clientId", ignore = true)
     @Mapping(target = "address.addressId", ignore = true)
     @Mapping(source = "phones", target = "phones", qualifiedByName = "phonesDTOsToPhoneModels")
+    @Mapping(source = "cpf", target = "cpf", qualifiedByName = "unmaskCpf")
     Client fromRequestDTOToModel(ClientDTO dto);
 
     @Mapping(source = "phones", target = "phones", qualifiedByName = "PhoneModelsTophonesDTOs")
@@ -36,5 +39,10 @@ public interface ClientMapper {
         return phones.stream()
                 .map(new PhoneMapperImpl()::fromModelToDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Named("unmaskCpf")
+    default String unmaskCpf(String cpf) {
+        return cpf.replaceAll("[\\.\\-]", "");
     }
 }
