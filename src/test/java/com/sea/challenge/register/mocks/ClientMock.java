@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.sea.challenge.register.models.dtos.ClientDTO;
+import com.sea.challenge.register.models.dtos.EmailDTO;
 import com.sea.challenge.register.models.entities.Client;
+import com.sea.challenge.register.models.entities.Email;
 
 public class ClientMock {
     public static Client SIMPLE_CLIENT = getSimpleClient();
@@ -18,14 +20,14 @@ public class ClientMock {
                 "32259163076",
                 AddressMock.SIMPLE_ADDRESS,
                 PhoneMock.SIMPLE_PHONES,
-                "client@mail.com");
+                List.of(new Email(1L, "client@mail.com")));
     }
 
     private static ClientDTO getSimpleClientRequestDTO() {
         return new ClientDTO(
                 "clientTest",
                 "322.591.630-76",
-                "client@mail.com",
+                List.of(new EmailDTO("client@mail.com")),
                 AddressMock.SIMPLE_ADDRESS_DTO,
                 PhoneMock.SIMPLE_PHONE_DTOS);
     }
@@ -37,14 +39,14 @@ public class ClientMock {
                 "12345678900",
                 AddressMock.SIMPLE_ADDRESS,
                 PhoneMock.SIMPLE_PHONES,
-                "email1@mail.com");
+                List.of(new Email(1L,"email1@mail.com")));
         Client c2 = new Client(
                 2L,
                 "client2",
                 "12345678900",
                 AddressMock.SIMPLE_ADDRESS,
                 PhoneMock.SIMPLE_PHONES,
-                "email2@mail.com");
+                List.of(new Email(2L,"email2@mail.com")));
         return Arrays.asList(c1, c2);
     }
 }
