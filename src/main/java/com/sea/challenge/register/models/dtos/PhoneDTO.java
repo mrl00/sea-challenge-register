@@ -14,4 +14,9 @@ import lombok.NoArgsConstructor;
 public class PhoneDTO {
     private PhoneType phoneType;
     private String phone;
+
+    @Override
+    public String toString() {
+        return String.format("[phone-type: %s, phone: %s]", this.phoneType, this.phone);
+    }
 }
