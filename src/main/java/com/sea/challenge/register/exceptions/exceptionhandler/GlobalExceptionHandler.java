@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.sea.challenge.register.exceptions.viacep.InvalidCepException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        List<String> errors = ex
+    public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException exception) {
+        List<String> errors = exception
                 .getBindingResult()
                 .getAllErrors()
                 .stream()
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler {
                     String field = ((FieldError) error).getField();
                     String value = ((FieldError) error).getRejectedValue().toString();
 
-                    return String.format("field: %s (%s) => error: %s", field, value, errorMessage);
+                    return getErrorMsg(field, value, errorMessage);
                 })
                 .collect(Collectors.toList());
 
@@ -41,14 +42,25 @@ public class GlobalExceptionHandler {
         if (exception.getCause() instanceof InvalidFormatException) {
             InvalidFormatException ifx = (InvalidFormatException) exception.getCause();
             if (ifx.getTargetType() != null && ifx.getTargetType().isEnum()) {
-                errorDetails = String.format("field: %s (%s) => error: the values must be %s",
-                        ifx.getPath().get(ifx.getPath().size()-1).getFieldName(), ifx.getValue(), Arrays.toString(ifx.getTargetType().getEnumConstants()));
+                errorDetails = getErrorMsg(
+                        ifx.getPath().get(ifx.getPath().size()-1).getFieldName(),
+                        ifx.getValue(),
+                        Arrays.toString(ifx.getTargetType().getEnumConstants()));
             }
         }
         return new ResponseEntity<>(getErrorsMap(List.of(errorDetails)), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
+    
+    @ExceptionHandler(InvalidCepException.class)
+    public ResponseEntity<Map<String, List<String>>> handleValidationException(InvalidCepException exception) {
+        return new ResponseEntity<>(getErrorsMap(List.of(getErrorMsg("cep", exception.getValue(), exception.getMessage()))), new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
 
-
+    private String getErrorMsg(String field, Object value, String message) {
+        String ERROR_MSG = "field: [ %s ], value:[ %s ] => error: [ %s ]";
+        return String.format(ERROR_MSG, field, value.toString(), message);
+    }
+    
     private Map<String, List<String>> getErrorsMap(List<String> errors) {
         Map<String, List<String>> errorResponse = new HashMap<>();
         errorResponse.put("errors", errors);

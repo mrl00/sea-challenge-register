@@ -3,6 +3,7 @@ package com.sea.challenge.register.models.dtos;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sea.challenge.register.models.enums.UF;
 
+import com.sea.challenge.register.validators.CEP;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddressDTO {
 
-    @Pattern(regexp = "^[0-9]{2}\\.[0-9]{3}-[0-9]{3}$", message = "{address.cep}")
+    @CEP(mask = true)
     @JsonProperty(required = true)
     private String cep;
 
