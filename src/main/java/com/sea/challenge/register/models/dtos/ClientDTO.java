@@ -21,6 +21,7 @@ public class ClientDTO {
     @JsonProperty(required = true)
     private String name;
 
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")
     @CPF(message = "{client.cpf}")
     @JsonProperty(required = true)
     private String cpf;

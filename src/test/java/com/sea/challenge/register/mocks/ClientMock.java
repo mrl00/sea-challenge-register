@@ -24,7 +24,7 @@ public class ClientMock {
     private static ClientDTO getSimpleClientRequestDTO() {
         return new ClientDTO(
                 "clientTest",
-                "32259163076",
+                "322.591.630-76",
                 "client@mail.com",
                 AddressMock.SIMPLE_ADDRESS_DTO,
                 PhoneMock.SIMPLE_PHONE_DTOS);

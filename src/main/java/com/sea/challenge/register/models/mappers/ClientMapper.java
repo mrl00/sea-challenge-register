@@ -19,9 +19,11 @@ public interface ClientMapper {
     @Mapping(target = "clientId", ignore = true)
     @Mapping(target = "address.addressId", ignore = true)
     @Mapping(source = "phones", target = "phones", qualifiedByName = "phonesDTOsToPhoneModels")
+    @Mapping(source = "cpf", target = "cpf", qualifiedByName = "unmaskCpf")
     Client fromRequestDTOToModel(ClientDTO dto);
 
-    @Mapping(source = "phones", target = "phones", qualifiedByName = "PhoneModelsTophonesDTOs")
+    @Mapping(source = "phones", target = "phones", qualifiedByName = "phoneModelsToPhonesDTOs")
+    @Mapping(source = "cpf", target = "cpf", qualifiedByName = "maskCpf")
     ClientDTO fromModelToDTO(Client client);
 
     @Named("phonesDTOsToPhoneModels")
@@ -31,10 +33,24 @@ public interface ClientMapper {
                 .collect(Collectors.toList());
     }
 
-    @Named("PhoneModelsTophonesDTOs")
+    @Named("phoneModelsToPhonesDTOs")
     default List<PhoneDTO> fromPhoneModelToPhoneDTO(List<Phone> phones) {
         return phones.stream()
                 .map(new PhoneMapperImpl()::fromModelToDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Named("unmaskCpf")
+    default String unmaskCpf(String cpf) {
+        return cpf.replaceAll("[\\.\\-]", "");
+    }
+
+    @Named("maskCpf")
+    default String maskCpf(String unmaskedCpf) {
+        String s1 = unmaskedCpf.substring(0,3);
+        String s2 = unmaskedCpf.substring(4,7);
+        String s3 = unmaskedCpf.substring(6,9);
+        String s4 = unmaskedCpf.substring(9,11);
+        return String.format("%s.%s.%s-%s", s1,s2,s3,s4);
     }
 }
