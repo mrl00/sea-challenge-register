@@ -1,6 +1,6 @@
 package com.sea.challenge.register.validators.impl;
 
-import com.sea.challenge.register.exceptions.viacep.CepNotFoundException;
+import com.sea.challenge.register.exceptions.viacep.InvalidCepException;
 import com.sea.challenge.register.validators.CEP;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -28,7 +28,7 @@ public class CEPValidator implements ConstraintValidator<CEP, String> {
         Matcher matcher = pattern.matcher(value);
 
         if(!matcher.matches())
-            throw new CepNotFoundException("invalid cep", value);
+            throw new InvalidCepException("invalid cep", value);
 
         return true;
     }
