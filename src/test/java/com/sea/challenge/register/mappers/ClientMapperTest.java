@@ -36,7 +36,7 @@ public class ClientMapperTest {
         // Client Fields
         assertEquals(dto.getName(), client.getName());
         assertEquals(dto.getEmail(), client.getEmail());
-        assertEquals(dto.getCpf(), client.getCpf());
+        assertEquals(dto.getCpf().replaceAll("[\\.\\-]", ""), client.getCpf());
 
         // Client Address
         assertEquals(addressDTO.getCep(), address.getCep());
