@@ -3,6 +3,7 @@ package com.sea.challenge.register.models.dtos;
 import java.util.List;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -26,14 +27,15 @@ public class ClientDTO {
     @JsonProperty(required = true)
     private String cpf;
 
-    @Email(message = "{client.email}")
+    @NotEmpty
     @JsonProperty(required = true)
-    private String email;
+    private List<@Valid EmailDTO> emails;
 
     @Valid
     @JsonProperty(required = true)
     private AddressDTO address;
 
+    @NotEmpty
     @JsonProperty(required = true)
     private List<@Valid PhoneDTO> phones;
 }

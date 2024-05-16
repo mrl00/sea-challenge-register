@@ -40,6 +40,6 @@ public class Client {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Phone> phones;
 
-    @Column(nullable = false)
-    private String email;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Email> emails;
 }
