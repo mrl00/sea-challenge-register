@@ -1,10 +1,13 @@
 package com.sea.challenge.register.mappers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 
 import java.util.List;
 
 import com.sea.challenge.register.models.dtos.ClientDTO;
+import com.sea.challenge.register.models.dtos.EmailDTO;
+import com.sea.challenge.register.models.entities.Email;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,19 +27,21 @@ public class ClientMapperTest {
 
     @Test
     public void fromRequestDTOToModelTest() {
-        ClientDTO dto = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
-        Client client = mapper.fromRequestDTOToModel(dto);
+        ClientDTO clientDTO = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
+        Client client = mapper.fromRequestDTOToModel(clientDTO);
 
-        AddressDTO addressDTO = dto.getAddress();
+        AddressDTO addressDTO = clientDTO.getAddress();
         Address address = client.getAddress();
 
-        List<PhoneDTO> phonesDTO = dto.getPhones();
+        List<PhoneDTO> phonesDTO = clientDTO.getPhones();
         List<Phone> phones = client.getPhones();
 
         // Client Fields
-        assertEquals(dto.getName(), client.getName());
-        assertEquals(dto.getEmail(), client.getEmail());
-        assertEquals(dto.getCpf().replaceAll("[\\.\\-]", ""), client.getCpf());
+        assertEquals(clientDTO.getName(), client.getName());
+        assertIterableEquals(
+                clientDTO.getEmails().stream().map(EmailDTO::getEmail).toList(),
+                client.getEmails().stream().map(Email::getEmail).toList());
+        assertEquals(clientDTO.getCpf().replaceAll("[\\.\\-]", ""), client.getCpf());
 
         // Client Address
         assertEquals(addressDTO.getCep(), address.getCep());
@@ -65,7 +70,9 @@ public class ClientMapperTest {
         // Client Fields
         assertEquals(clientDTO.getName(), client.getName());
         assertEquals(clientDTO.getCpf(), mapper.maskCpf(client.getCpf()));
-        assertEquals(clientDTO.getEmail(), client.getEmail());
+        assertIterableEquals(
+                clientDTO.getEmails().stream().map(EmailDTO::getEmail).toList(),
+                client.getEmails().stream().map(Email::getEmail).toList());
 
         // Client Address
         assertEquals(addressDTO.getCep(), address.getCep());

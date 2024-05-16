@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
                 errorDetails = getErrorMsg(
                         ifx.getPath().get(ifx.getPath().size()-1).getFieldName(),
                         ifx.getValue(),
-                        Arrays.toString(ifx.getTargetType().getEnumConstants()));
+                        "available values: " + Arrays.toString(ifx.getTargetType().getEnumConstants()));
             }
         }
         return new ResponseEntity<>(getErrorsMap(List.of(errorDetails)), new HttpHeaders(), HttpStatus.BAD_REQUEST);
