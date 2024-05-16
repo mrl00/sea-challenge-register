@@ -1,6 +1,5 @@
 package com.sea.challenge.register.controllers;
 
-import com.sea.challenge.register.exceptions.viacep.CepNotFoundException;
 import com.sea.challenge.register.mocks.ViaCepMock;
 import com.sea.challenge.register.models.dtos.viacep.ViaCepDTO;
 import com.sea.challenge.register.services.consumer.viacep.ViaCepConsumerService;

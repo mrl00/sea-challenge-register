@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import com.sea.challenge.register.exceptions.viacep.CepNotFoundException;
+import com.sea.challenge.register.exceptions.viacep.InvalidCepException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,8 +51,8 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(List.of(errorDetails)), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
     
-    @ExceptionHandler(CepNotFoundException.class)
-    public ResponseEntity<Map<String, List<String>>> handleValidationException(CepNotFoundException exception) {
+    @ExceptionHandler(InvalidCepException.class)
+    public ResponseEntity<Map<String, List<String>>> handleValidationException(InvalidCepException exception) {
         return new ResponseEntity<>(getErrorsMap(List.of(getErrorMsg("cep", exception.getValue(), exception.getMessage()))), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
