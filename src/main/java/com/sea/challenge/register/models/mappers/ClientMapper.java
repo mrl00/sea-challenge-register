@@ -24,7 +24,7 @@ public interface ClientMapper {
     @Mapping(source = "cpf", target = "cpf", qualifiedByName = "unmaskCpf")
     Client fromRequestDTOToModel(ClientDTO dto);
 
-    @Mapping(source = "phones", target = "phones", qualifiedByName = "PhoneModelsTophonesDTOs")
+    @Mapping(source = "phones", target = "phones", qualifiedByName = "phoneModelsToPhonesDTOs")
     ClientDTO fromModelToDTO(Client client);
 
     @Named("phonesDTOsToPhoneModels")
@@ -34,7 +34,7 @@ public interface ClientMapper {
                 .collect(Collectors.toList());
     }
 
-    @Named("PhoneModelsTophonesDTOs")
+    @Named("phoneModelsToPhonesDTOs")
     default List<PhoneDTO> fromPhoneModelToPhoneDTO(List<Phone> phones) {
         return phones.stream()
                 .map(new PhoneMapperImpl()::fromModelToDTO)
