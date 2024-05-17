@@ -1,6 +1,9 @@
 ### run project
 mvn clean && mvn spring-boot:run
 
+### Não concluído:
+test unitarios com web security
+
 ## Referencias
 ### sites
 https://www.baeldung.com/jpa-size-length-column-differences \
