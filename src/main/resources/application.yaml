@@ -12,7 +12,7 @@ spring:
         mapper:
             ACCEPT_CASE_INSENSITIVE_ENUMS: true
         deserialization:
-            FAIL_OM_UNKNOWN_PROPERTIES: true
+            FAIL_ON_UNKNOWN_PROPERTIES: true
             FAIL_ON_MISSING_CREATOR_PROPERTIES: true
 
 api:
