@@ -1,13 +1,19 @@
 spring:
+    config:
+        active:
+            on-profile: local
     application:
         name: register
     datasource:
-        driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/register
-        username: postgres
-        password: qwert
+        driver-class-name: org.h2.Driver
+        url: jdbc:h2:mem:register
+        username: sa
+        password: password
     jpa:
-        hibernate.ddl-auto: create-drop
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate.ddl-auto: none
+    h2:
+        console.enabled: true
     jackson:
         mapper:
             ACCEPT_CASE_INSENSITIVE_ENUMS: true
