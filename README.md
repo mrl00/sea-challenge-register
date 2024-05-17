@@ -66,12 +66,12 @@ uri: /register/v1/cep/{cep} \
 metodo: GET 
 
 
-### Não concluído:
+## Não concluído:
 * test unitarios com web security 
 * melhoria no tratamento de erros 
 
 ## Referencias
-### sites
+
 https://www.baeldung.com/jpa-size-length-column-differences \
 https://www.freecodecamp.org/news/unit-testing-services-endpoints-and-repositories-in-spring-boot-4b7d9dc2b772/ \
 https://www.baeldung.com/spring-security-registration-password-encoding-bcrypt \
