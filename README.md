@@ -3,6 +3,7 @@ mvn clean && mvn spring-boot:run
 
 ### Não concluído:
 * test unitarios com web security
+* melhoria no tratamento de erros
 
 ## Referencias
 ### sites
