@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.sea.challenge.register.models.entities.Client;
 
+import java.util.Optional;
+
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
+    boolean existsByCpf(String cpf);
 }

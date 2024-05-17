@@ -19,7 +19,7 @@ public class AuthorizationService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserDetails> optionalUserDetails = userRepository.findByUserName(username);
         if(optionalUserDetails.isEmpty())
-            throw new UsernameNotFoundException(String.format("% username is not found"));
+            throw new UsernameNotFoundException(String.format("%s username is not found", username));
         return optionalUserDetails.get();
     }
 }

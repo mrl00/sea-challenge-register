@@ -1,11 +1,10 @@
 package com.sea.challenge.register.models.dtos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sea.challenge.register.models.enums.UF;
 
 import com.sea.challenge.register.validators.CEP;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,26 +15,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AddressDTO {
 
-    @CEP(mask = true)
-    @JsonProperty(required = true)
+    @CEP(mask = true, message = "{pattern.invalid.cep}")
+    @NotNull
     private String cep;
 
     @NotBlank
-    @Size(max = 60, message = "{address.publicplace}")
-    @JsonProperty(required = true)
+    @Size(max = 60, message = "{address.publicplace.length}")
+    @NotNull
     private String publicPlace;
 
     @NotBlank
-    @Size(max = 100, message = "{address.neighborhood}")
-    @JsonProperty(required = true)
+    @Size(max = 100, message = "{address.neighborhood.length}")
+    @NotNull
     private String neighborhood;
 
     @NotBlank
-    @Size(max = 100, message = "{address.city}")
-    @JsonProperty(required = true)
+    @Size(max = 100, message = "{address.city.length}")
+    @NotNull
     private String city;
 
-    @JsonProperty(required = true)
+    @NotNull
     private UF uf;
 
     @Size(max = 100)

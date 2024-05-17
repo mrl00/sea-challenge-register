@@ -59,7 +59,8 @@ CREATE TABLE tb_clients (
     cpf VARCHAR(11) NOT NULL,
     name VARCHAR(100) NOT NULL,
     UNIQUE (address_id),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE (cpf)
 );
 
 -- public.tb_clients_emails definition

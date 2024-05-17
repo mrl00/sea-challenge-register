@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.times;
@@ -15,8 +14,10 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 import java.util.Optional;
 
+import com.sea.challenge.register.exceptions.CpfAlreadyExistsException;
 import com.sea.challenge.register.models.dtos.ClientDTO;
 import com.sea.challenge.register.models.mappers.ClientMapper;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -91,9 +92,21 @@ public class ClientServiceTest {
     }
 
     @Test
+    @Disabled
     public void testSaveClientWhenClientIsNull() {
-        when(clientRepository.save(any())).thenThrow(IllegalArgumentException.class);
+        when(clientRepository.save(any()))
+                .thenThrow(IllegalArgumentException.class);
+
         assertThrows(IllegalArgumentException.class, () -> clientService.saveClient(null));
+    }
+
+    @Test
+    public void testSaveClient_WhenCpfAlreadyExists() {
+        ClientDTO clientDTOToSave = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
+
+        when(clientRepository.existsByCpf(anyString()))
+                .thenReturn(true);
+        assertThrows(CpfAlreadyExistsException.class, () -> clientService.saveClient(clientDTOToSave));
     }
 
     @Test

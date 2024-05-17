@@ -3,6 +3,7 @@ package com.sea.challenge.register.services.impl;
 import java.util.List;
 import java.util.Optional;
 
+import com.sea.challenge.register.exceptions.CpfAlreadyExistsException;
 import com.sea.challenge.register.models.dtos.ClientDTO;
 import com.sea.challenge.register.models.mappers.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,8 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Client saveClient(ClientDTO clientDTO) {
         Client client = mapper.fromRequestDTOToModel(clientDTO);
+        if(clientRepository.existsByCpf(client.getCpf()))
+            throw new CpfAlreadyExistsException("cpf already exists", client.getCpf());
         return clientRepository.save(client);
     }
 
