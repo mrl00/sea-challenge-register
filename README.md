@@ -68,7 +68,8 @@ metodo: GET
 
 ## Não concluído:
 * test unitarios com web security 
-* melhoria no tratamento de erros 
+* melhoria no tratamento de erros
+* documentacao da api
 
 ## Referencias
 
