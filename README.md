@@ -1,9 +1,74 @@
 ### run project
 mvn clean && mvn spring-boot:run
 
+## Exemplos
+
+### login:
+uri: /auth/login \
+metodo: POST \
+body: 
+```json
+{
+    "userName": "admin",
+    "password": "123qwe!@#"
+}
+```
+
+### registro de usuario:
+uri: /auth/register \
+metodo: POST \
+body: 
+```json
+{
+    "userName": "admin",
+    "password": "123qwe!@#",
+    "role": "ADMIN"
+}
+```
+
+### cadastro de client
+uri: /register/v1/client
+metodo: POST
+body: 
+```json
+{
+    "name": "joao ",
+    "cpf": "440.882.910-26",
+    "emails": [
+        "user@mail1.com"
+    ],
+    "address": {
+        "cep": "11.222-333",
+        "publicPlace": "logradouro",
+        "neighborhood": "bairro",
+        "city": "cidade",
+        "uf": "DF",
+        "complement": "complement"
+    },
+    "phones": [
+        {
+            "phoneType": "CeLLPHONE",
+            "phone": "(61) 98888-7777"
+        },
+        {
+            "phoneType": "COMMERCIAL",
+            "phone": "(61) 8888-7777"
+        }
+    ]
+}
+```
+### consulta de cliente:
+uri: /register/v1/client/{id} \
+metodo: GET 
+
+### consulta de cep:
+uri: /register/v1/cep/{cep} \
+metodo: GET 
+
+
 ### Não concluído:
-* test unitarios com web security
-* melhoria no tratamento de erros
+* test unitarios com web security 
+* melhoria no tratamento de erros 
 
 ## Referencias
 ### sites
