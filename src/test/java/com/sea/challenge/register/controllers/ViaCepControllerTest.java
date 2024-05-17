@@ -21,7 +21,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +33,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class ViaCepControllerTest {
     @MockBean
     private ViaCepConsumerService service;
+
+    @MockBean
+    Authentication authentication;
+
+    @MockBean
+    SecurityContext securityContext;
 
     @Autowired
     private MockMvc mockMvc;
@@ -52,10 +57,7 @@ public class ViaCepControllerTest {
     public void givenAValidCep_thenOk() throws Exception {
         ViaCepDTO viaCepDTO = ViaCepMock.SIMPLE_VIACEP_DTO;
 
-        Authentication authentication = mock(Authentication.class);
         when(authentication.getName()).thenReturn("user");
-
-        SecurityContext securityContext = mock(SecurityContext.class);
         when(securityContext.getAuthentication()).thenReturn(authentication);
 
         SecurityContextHolder.setContext(securityContext);
@@ -71,14 +73,10 @@ public class ViaCepControllerTest {
     public void givenAInvalidCep_thenBadRequest() throws Exception {
         ViaCepDTO viaCepDTO = ViaCepMock.SIMPLE_VIACEP_DTO;
 
-        Authentication authentication = mock(Authentication.class);
         when(authentication.getName()).thenReturn("user");
-
-        SecurityContext securityContext = mock(SecurityContext.class);
         when(securityContext.getAuthentication()).thenReturn(authentication);
 
         SecurityContextHolder.setContext(securityContext);
-
 
         when(service.getCepDTO(anyString()))
                 .thenReturn(viaCepDTO);
@@ -91,10 +89,7 @@ public class ViaCepControllerTest {
     public void givenAValidCep_thenCepNotFound() throws Exception {
         ViaCepDTO viaCepDTO = ViaCepMock.SIMPLE_VIACEP_DTO_NOTFOUND;
 
-        Authentication authentication = mock(Authentication.class);
         when(authentication.getName()).thenReturn("user");
-
-        SecurityContext securityContext = mock(SecurityContext.class);
         when(securityContext.getAuthentication()).thenReturn(authentication);
 
         SecurityContextHolder.setContext(securityContext);
