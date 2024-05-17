@@ -5,7 +5,7 @@ import com.sea.challenge.register.models.dtos.security.LoginResponseDTO;
 import com.sea.challenge.register.models.dtos.security.UserDTO;
 import com.sea.challenge.register.models.entities.security.User;
 import com.sea.challenge.register.models.mappers.UserMapper;
-import com.sea.challenge.register.repositories.security.UserRepository;
+import com.sea.challenge.register.services.security.AuthenticationService;
 import com.sea.challenge.register.services.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private UserRepository repository;
+    private AuthenticationService authenticationService;
 
     @Autowired
     private UserMapper mapper;
@@ -45,14 +45,11 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody @Valid UserDTO request) {
-        if(repository.findByUserName(request.getUserName()).isPresent())
-            return ResponseEntity.badRequest().build();
-
         String encryptedPassword = new BCryptPasswordEncoder().encode(request.getPassword());
         User user = mapper.fromUserDTOToUserModel(request);
         user.setPassword(encryptedPassword);
 
-        repository.save(user);
+        authenticationService.saveUser(user);
 
         return ResponseEntity.ok().build();
     }
