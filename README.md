@@ -2,7 +2,7 @@
 mvn clean && mvn spring-boot:run
 
 ### Não concluído:
-test unitarios com web security
+* test unitarios com web security
 
 ## Referencias
 ### sites
