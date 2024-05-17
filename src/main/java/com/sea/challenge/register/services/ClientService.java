@@ -7,11 +7,11 @@ import com.sea.challenge.register.models.dtos.ClientDTO;
 import com.sea.challenge.register.models.entities.Client;
 
 public interface ClientService {
-    public Optional<ClientDTO> findClientById(Long id);
+    Optional<ClientDTO> findClientById(Long id);
 
-    public List<Client> findAllClients();
+    List<Client> findAllClients();
 
-    public Client saveClient(ClientDTO client);
+    Client saveClient(ClientDTO client);
 
-    public void deleteClientById(Long id);
+    void deleteClientById(Long id);
 }
