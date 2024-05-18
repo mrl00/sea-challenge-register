@@ -94,7 +94,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CpfAlreadyExistsException.class)
     public ResponseEntity<ExceptionFilter> handleCpfAlreadyExistsException(CpfAlreadyExistsException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
-                .title("data integrity violation")
+                .title("cpf already exists")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -107,7 +107,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidPhoneNumberException.class)
     public ResponseEntity<ExceptionFilter> handleInvalidPhoneNumberException(InvalidPhoneNumberException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
-                .title("data integrity violation")
+                .title("invalid phone number")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -119,7 +119,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNameAlreadyExistsException.class)
     public ResponseEntity<ExceptionFilter> handleUserNameAlreadyExistsException(UserNameAlreadyExistsException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
-                .title("data integrity violation")
+                .title("username already exists")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
