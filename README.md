@@ -1,9 +1,8 @@
 # Run project
-## local
-mvn clean && mvn spring-boot:run
-
 ## docker compose
-### env-sample:
+Save **.env** and **docker-compose** in the same folder and run **_docker-compose up_**
+
+#### .env:
 ```dotenv
 API_SERVER_PORT=9000
 
@@ -23,7 +22,7 @@ DBASE_PASSWORD=qwert
 JWT_SECRET=asdasd
 ```
 
-### docker-compose file:
+#### docker-compose file:
 ```yaml
 version: '3.1'
 
