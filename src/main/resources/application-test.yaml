@@ -1,4 +1,6 @@
 spring:
+    flyway:
+        locations: classpath:/test/db/migration
     application:
         name: register
     datasource:
