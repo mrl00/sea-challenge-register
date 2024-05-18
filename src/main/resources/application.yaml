@@ -1,14 +1,15 @@
+server:
+    port: ${SERVER_PORT:9000}
 spring:
     application:
         name: register
     datasource:
-        driver-class-name: org.h2.Driver
-        url: jdbc:h2:mem:register
-        username: sa
-        password: sa
+        driver-class-name: ${DB_DRIVER}
+        url: ${DB_URL}
+        username: ${DB_USERNAME}
+        password: ${DB_PASSWORD}
     jpa:
-        database-platform: org.hibernate.dialect.H2Dialect
-        hibernate.ddl-auto: none
+        hibernate.ddl-auto: create-drop
     jackson:
         mapper:
             ACCEPT_CASE_INSENSITIVE_ENUMS: true
@@ -19,4 +20,4 @@ spring:
 api:
     security:
         token:
-            secret: ${JWT_SECRET:secret}
+            secret: ${JWT_SECRET}
