@@ -30,7 +30,7 @@ public class Client {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @Column(length = 11, nullable = false)
+    @Column(length = 11, nullable = false, unique = true)
     private String cpf;
 
     @OneToOne(cascade = CascadeType.ALL)

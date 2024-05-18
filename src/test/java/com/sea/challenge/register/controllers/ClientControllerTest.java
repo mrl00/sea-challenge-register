@@ -8,14 +8,26 @@ import com.sea.challenge.register.services.ClientService;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
@@ -26,15 +38,21 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles({"test"})
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(ClientController.class)
+@ExtendWith(MockitoExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@AutoConfigureMockMvc
+@MockitoSettings(strictness = Strictness.LENIENT)
 public class ClientControllerTest {
     @MockBean
     private ClientService clientService;
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private WebApplicationContext context;
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
@@ -43,12 +61,21 @@ public class ClientControllerTest {
 
     @BeforeEach
     public void setup() {
+        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
         savedClient = ClientMock.SIMPLE_CLIENT;
         clientDTO = ClientMock.SIMPLE_CLIENT_REQUEST_DTO;
     }
 
     @Test
     public void findClientByIdTest_WhenClientExists() throws Exception {
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("admin");
+
+        SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+
+        SecurityContextHolder.setContext(securityContext);
+
         when(clientService.findClientById(anyLong()))
                 .thenReturn(Optional.of(clientDTO));
 
@@ -58,6 +85,14 @@ public class ClientControllerTest {
 
     @Test
     public void findClientByIdTest_WhenClientNotExists() throws Exception {
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("admin");
+
+        SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+
+        SecurityContextHolder.setContext(securityContext);
+
         when(clientService.findClientById(anyLong()))
                 .thenReturn(Optional.empty());
 
@@ -68,6 +103,14 @@ public class ClientControllerTest {
     @Order(value = Integer.MAX_VALUE / 2)
     @Test
     public void saveClientTest_Success() throws Exception {
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("admin");
+
+        SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+
+        SecurityContextHolder.setContext(securityContext);
+
         when(clientService.saveClient(any(ClientDTO.class)))
                 .thenReturn(savedClient);
         clientDTO.getAddress().setCep("11.456-000");
@@ -82,6 +125,14 @@ public class ClientControllerTest {
 
     @Test
     public void saveClientTest_WhenPhoneOrAddressAreInvalid() throws Exception {
+        Authentication authentication = mock(Authentication.class);
+        when(authentication.getName()).thenReturn("admin");
+
+        SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(authentication);
+
+        SecurityContextHolder.setContext(securityContext);
+
         //set invalid cep for dto
         clientDTO.getAddress().setCep("11456000");
 

@@ -1,5 +1,6 @@
 package com.sea.challenge.register.validators.impl;
 
+import com.sea.challenge.register.exceptions.InvalidPhoneNumberException;
 import com.sea.challenge.register.models.dtos.PhoneDTO;
 import com.sea.challenge.register.models.enums.PhoneType;
 import com.sea.challenge.register.validators.PhoneNumber;
@@ -15,8 +16,21 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, Ph
         String phoneValue = value.getPhone();
 
         return switch (phoneTypeValue) {
-            case CELLPHONE -> phoneValue.matches("\\(\\d{2}\\) \\d{5}-\\d{4}");
-            case RESIDENTIAL, COMMERCIAL -> phoneValue.matches("\\(\\d{2}\\) \\d{4}-\\d{4}");
+            case CELLPHONE -> {
+                if (!phoneValue.matches("\\(\\d{2}\\) \\d{5}-\\d{4}"))
+                    throw new InvalidPhoneNumberException("cellphone number is invalid", phoneValue);
+                yield true;
+            }
+            case RESIDENTIAL -> {
+                if (!phoneValue.matches("\\(\\d{2}\\) \\d{4}-\\d{4}"))
+                    throw new InvalidPhoneNumberException("residential number is invalid", phoneValue);
+                yield true;
+            }
+            case COMMERCIAL -> {
+                if (!phoneValue.matches("\\(\\d{2}\\) \\d{4}-\\d{4}"))
+                    throw new InvalidPhoneNumberException("commercial number is invalid", phoneValue);
+                yield true;
+            }
             default -> false;
         };
     }

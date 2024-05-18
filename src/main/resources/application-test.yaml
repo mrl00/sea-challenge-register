@@ -1,13 +1,13 @@
-server:
-    port: ${SERVER_PORT:8080}
 spring:
+    flyway:
+        locations: classpath:/test/db/migration
     application:
         name: register
     datasource:
-        driver-class-name: ${DBASE_DRIVER:org.postgresql.Driver}
-        url: ${DBASE_URL:jdbc:postgresql://localhost:5432/register}
-        username: ${DBASE_USERNAME:postgres}
-        password: ${DBASE_PASSWORD:qwert}
+        driver-class-name: ${TEST_DB_DRIVER:org.h2.Driver}
+        url: ${TEST_DB_URL:jdbc:h2:mem:register}
+        username: ${TEST_DB_USERNAME:sa}
+        password: ${TEST_DB_PASSWORD:sa}
     jpa:
         hibernate.ddl-auto: none
     jackson:
@@ -20,4 +20,4 @@ spring:
 api:
     security:
         token:
-            secret: ${JWT_SECRET:asdasd}
+            secret: ${JWT_SECRET:test}

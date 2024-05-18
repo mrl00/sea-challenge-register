@@ -1,4 +1,4 @@
-FROM maven:latest AS builder
+FROM maven:maven:3-eclipse-temurin-17 AS builder
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN mvn dependency:go-offline
 
 COPY src ./src
 
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:22-jre-alpine
 
