@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.sea.challenge.register.exceptions.CpfAlreadyExistsException;
@@ -93,7 +94,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CpfAlreadyExistsException.class)
     public ResponseEntity<ExceptionFilter> handleCpfAlreadyExistsException(CpfAlreadyExistsException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
-                .title("data integrity violation")
+                .title("cpf already exists")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -106,7 +107,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidPhoneNumberException.class)
     public ResponseEntity<ExceptionFilter> handleInvalidPhoneNumberException(InvalidPhoneNumberException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
-                .title("data integrity violation")
+                .title("invalid phone number")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -118,7 +119,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(UserNameAlreadyExistsException.class)
     public ResponseEntity<ExceptionFilter> handleUserNameAlreadyExistsException(UserNameAlreadyExistsException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
-                .title("data integrity violation")
+                .title("username already exists")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
@@ -131,6 +132,18 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ExceptionFilter> handleJWTVerificationException(JWTVerificationException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
                 .title("jwt validate error")
+                .timestamp(LocalDateTime.now())
+                .devMsg(exception.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .details(List.of(getErrorMsg("jwt token", "", exception.getMessage())))
+                .build();
+        return new ResponseEntity<>(exceptionFilter, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(JWTCreationException.class)
+    public ResponseEntity<ExceptionFilter> handleJWTCreationException(JWTCreationException exception) {
+        ExceptionFilter exceptionFilter = ExceptionFilter.builder()
+                .title("jwt token creation error")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
