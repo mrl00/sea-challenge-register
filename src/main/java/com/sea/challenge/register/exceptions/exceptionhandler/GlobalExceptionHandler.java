@@ -135,8 +135,8 @@ public class GlobalExceptionHandler {
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .details(List.of(getErrorMsg("jwt token", "", exception.getMessage())))
-
                 .build();
+        return new ResponseEntity<>(exceptionFilter, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
     private String getErrorMsg(String field, Object value, String message) {
