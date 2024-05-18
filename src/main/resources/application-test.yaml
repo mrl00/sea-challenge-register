@@ -1,14 +1,13 @@
-server:
-    port: ${SERVER_PORT:9000}
 spring:
     application:
         name: register
     datasource:
-        driver-class-name: ${DB_DRIVER}
-        url: ${DB_URL}
-        username: ${DB_USERNAME}
-        password: ${DB_PASSWORD}
+        driver-class-name: org.h2.Driver
+        url: ${TEST_DB_URL:jdbc:h2:mem:register}
+        username: ${TEST_DB_USERNAME:sa}
+        password: ${TEST_DB_PASSWORD:sa}
     jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
         hibernate.ddl-auto: none
     jackson:
         mapper:

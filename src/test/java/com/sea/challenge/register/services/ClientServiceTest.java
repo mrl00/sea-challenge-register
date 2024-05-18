@@ -26,7 +26,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.sea.challenge.register.mocks.ClientMock;
 import com.sea.challenge.register.models.entities.Client;
 import com.sea.challenge.register.repositories.ClientRepository;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles({"test"})
 @SpringBootTest
 public class ClientServiceTest {
     @Autowired

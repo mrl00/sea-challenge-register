@@ -10,7 +10,9 @@ import com.sea.challenge.register.mocks.AddressMock;
 import com.sea.challenge.register.models.dtos.AddressDTO;
 import com.sea.challenge.register.models.entities.Address;
 import com.sea.challenge.register.models.mappers.AddressMapper;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles({"test"})
 @SpringBootTest
 public class AddressMapperTest {
 
