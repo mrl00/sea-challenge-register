@@ -16,4 +16,6 @@ WORKDIR /app
 
 COPY --from=builder /app/target/register-0.0.1-SNAPSHOT.jar .
 
+EXPOSE 8080
+
 ENTRYPOINT ["java", "-jar", "register-0.0.1-SNAPSHOT.jar"]
