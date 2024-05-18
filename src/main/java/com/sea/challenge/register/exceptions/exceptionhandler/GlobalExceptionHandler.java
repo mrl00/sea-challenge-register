@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.sea.challenge.register.exceptions.CpfAlreadyExistsException;
 import com.sea.challenge.register.exceptions.InvalidPhoneNumberException;
@@ -124,6 +125,18 @@ public class GlobalExceptionHandler {
                 .details(List.of(getErrorMsg("username", exception.getUsername(), exception.getMessage())))
                 .build();
         return new ResponseEntity<>(exceptionFilter, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(JWTVerificationException.class)
+    public ResponseEntity<ExceptionFilter> handleJWTVerificationException(JWTVerificationException exception) {
+        ExceptionFilter exceptionFilter = ExceptionFilter.builder()
+                .title("jwt validate error")
+                .timestamp(LocalDateTime.now())
+                .devMsg(exception.getMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .details(List.of(getErrorMsg("jwt token", "", exception.getMessage())))
+
+                .build();
     }
 
     private String getErrorMsg(String field, Object value, String message) {
