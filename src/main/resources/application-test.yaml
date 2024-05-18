@@ -1,0 +1,22 @@
+spring:
+    application:
+        name: register
+    datasource:
+        driver-class-name: org.h2.Driver
+        url: ${TEST_DB_URL:jdbc:h2:mem:register}
+        username: ${TEST_DB_USERNAME:sa}
+        password: ${TEST_DB_PASSWORD:sa}
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect
+        hibernate.ddl-auto: none
+    jackson:
+        mapper:
+            ACCEPT_CASE_INSENSITIVE_ENUMS: true
+        deserialization:
+            FAIL_ON_UNKNOWN_PROPERTIES: true
+            FAIL_ON_MISSING_CREATOR_PROPERTIES: true
+
+api:
+    security:
+        token:
+            secret: ${JWT_SECRET}
