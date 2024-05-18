@@ -4,10 +4,10 @@ spring:
     application:
         name: register
     datasource:
-        driver-class-name: ${DBASE_DRIVER}
-        url: ${DBASE_URL}
-        username: ${DBASE_USERNAME}
-        password: ${DBASE_PASSWORD}
+        driver-class-name: ${DBASE_DRIVER:org.postgresql.Driver}
+        url: ${DBASE_URL:jdbc:postgresql://localhost:5432/register}
+        username: ${DBASE_USERNAME:postgres}
+        password: ${DBASE_PASSWORD:qwert}
     jpa:
         hibernate.ddl-auto: none
     jackson:
@@ -20,4 +20,4 @@ spring:
 api:
     security:
         token:
-            secret: ${JWT_SECRET}
+            secret: ${JWT_SECRET:asdasd}
