@@ -131,7 +131,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(JWTVerificationException.class)
     public ResponseEntity<ExceptionFilter> handleJWTVerificationException(JWTVerificationException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
-                .title("jwt validate error")
+                .title("jwt validate  error")
                 .timestamp(LocalDateTime.now())
                 .devMsg(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.value())
