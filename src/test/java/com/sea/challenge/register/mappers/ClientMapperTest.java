@@ -19,7 +19,9 @@ import com.sea.challenge.register.models.entities.Address;
 import com.sea.challenge.register.models.entities.Client;
 import com.sea.challenge.register.models.entities.Phone;
 import com.sea.challenge.register.models.mappers.ClientMapper;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles({"test"})
 @SpringBootTest
 public class ClientMapperTest {
     @Autowired

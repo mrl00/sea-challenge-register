@@ -11,7 +11,9 @@ import com.sea.challenge.register.models.dtos.PhoneDTO;
 import com.sea.challenge.register.models.entities.Phone;
 import com.sea.challenge.register.models.enums.PhoneType;
 import com.sea.challenge.register.models.mappers.PhoneMapper;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles({"test"})
 @SpringBootTest
 public class PhoneMapperTest {
 
