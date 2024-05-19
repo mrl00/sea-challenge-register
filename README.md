@@ -1,3 +1,9 @@
+![gh_actions](https://github.com/mrl00/sea-challenge-register/actions/workflows/cy.yaml/badge.svg) \
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
+
 # Run project
 ## docker compose
 Save **.env** and **docker-compose** in the same folder and run **_docker-compose up_**
