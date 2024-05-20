@@ -16,6 +16,9 @@ spring:
         deserialization:
             FAIL_ON_UNKNOWN_PROPERTIES: true
             FAIL_ON_MISSING_CREATOR_PROPERTIES: true
+springdoc:
+    swagger-ui:
+        path: /swagger-ui-custom.html
 
 api:
     security:
