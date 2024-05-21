@@ -20,6 +20,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class SecurityConfigurations {
 
+    private static final String[] AUTH_WHITELIST = {
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            // other public endpoints of your API may be appended to this array
+            "/register/health_check"
+    };
+
     @Autowired
     private SecurityFilter securityFilter;
 
@@ -29,12 +38,12 @@ public class SecurityConfigurations {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(AUTH_WHITELIST).permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/register/health_check").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/register/v1/cep").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST, "/register/v1/client").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/register/v1/client").hasRole("USER")
+                        .requestMatchers(HttpMethod.POST, "/register/v1/client").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/register/v1/cep").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
