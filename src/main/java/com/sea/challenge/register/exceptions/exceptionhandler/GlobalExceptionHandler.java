@@ -8,6 +8,7 @@ import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.sea.challenge.register.exceptions.CpfAlreadyExistsException;
+import com.sea.challenge.register.exceptions.EmailAlreadyExistsException;
 import com.sea.challenge.register.exceptions.InvalidPhoneNumberException;
 import com.sea.challenge.register.exceptions.security.UserNameAlreadyExistsException;
 import com.sea.challenge.register.exceptions.viacep.InvalidCepException;
@@ -104,6 +105,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(exceptionFilter, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ExceptionFilter> handleEmailAlreadyExistsException(EmailAlreadyExistsException exception) {
+        ExceptionFilter exceptionFilter = ExceptionFilter.builder()
+                .title("email already exists")
+                .timestamp(LocalDateTime.now())
+                .devMsg(exception.getLocalizedMessage())
+                .status(HttpStatus.BAD_REQUEST.value())
+                .details(List.of(getErrorMsg("emails", exception.getEmails(), exception.getMessage())))
+                .build();
+        return new ResponseEntity<>(exceptionFilter, new HttpHeaders(), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(InvalidPhoneNumberException.class)
     public ResponseEntity<ExceptionFilter> handleInvalidPhoneNumberException(InvalidPhoneNumberException exception) {
         ExceptionFilter exceptionFilter = ExceptionFilter.builder()
@@ -151,6 +164,7 @@ public class GlobalExceptionHandler {
                 .build();
         return new ResponseEntity<>(exceptionFilter, new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
+
 
     private String getErrorMsg(String field, Object value, String message) {
         String ERROR_MSG = "field: [ %s ], value:[ %s ] => error: [ %s ]";
